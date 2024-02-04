@@ -1,13 +1,27 @@
-import React from "react";
+// Item.js
+import React, { useState } from "react";
 
-function Item({ name, category }) {
+const Item = ({ name, category }) => {
+  // State variable to track whether the item is in the cart or not
+  const [isInCart, setIsInCart] = useState(false);
+
+  // Event handler to toggle the cart status
+  const toggleCartStatus = () => {
+    setIsInCart(!isInCart);
+  };
+
+  // Dynamic class for the <li> element based on the cart status
+  const itemClass = isInCart ? "in-cart" : "";
+
   return (
-    <li className="">
+    <li className={itemClass}>
       <span>{name}</span>
       <span className="category">{category}</span>
-      <button className="add">Add to Cart</button>
+      <button onClick={toggleCartStatus}>
+        {isInCart ? "Remove From Cart" : "Add to Cart"}
+      </button>
     </li>
   );
-}
+};
 
 export default Item;
